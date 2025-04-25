@@ -162,5 +162,10 @@ def like(post_id):
     add_like(post_id, session['username'])
     return redirect(request.referrer)
 
+@app.route('/ping')
+def ping():
+    return "Flask app is alive!"
+
+
 if __name__ == '__main__':
     app.run(debug=True)
