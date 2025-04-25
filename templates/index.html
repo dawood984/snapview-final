@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SnapView Feed</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">SnapView</div>
+        <div class="nav-right">
+            <a href="{{ url_for('home') }}">Home</a>
+            {% if session.get('username') %}
+                {% if session['role'] == 'creator' %}
+                    <a href="{{ url_for('upload') }}">Upload</a>
+                    <a href="{{ url_for('my_uploads') }}">My Uploads</a>
+                    <a href="{{ url_for('creator_dashboard') }}">Dashboard</a>
+                {% else %}
+                    <a href="{{ url_for('consumer_dashboard') }}">Dashboard</a>
+                {% endif %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="feed-container">
+        <h2>Latest Content from All Creators</h2>
+        <p class="subtext">Public feed available to everyone</p>
+
+        {% if posts %}
+            {% for post in posts %}
+                <div class="post-card enhanced-card">
+                    <div class="media-preview">
+                        {% if post.filename.endswith('.mp4') %}
+                            <video controls>
+                                <source src="{{ url_for('static', filename='uploads/' + post.filename) }}" type="video/mp4">
+                            </video>
+                        {% else %}
+                            <img src="{{ url_for('static', filename='uploads/' + post.filename) }}" alt="media">
+                        {% endif %}
+                    </div>
+
+                    <div class="post-meta">
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.caption }}</p>
+                        <small>📍 {{ post.location }} | 👥 {{ post.people }}</small><br>
+                        <small>Uploaded by <strong>{{ post.username }}</strong></small>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No content available yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,235 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2a2a2a;
+    color: white;
+    padding: 15px 30px;
+}
+
+.navbar .nav-left {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.navbar .nav-right a {
+    color: #f0f0f0;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+/* Feed */
+.feed-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.post-card {
+    background: #2d2d2d;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.media-preview img,
+.media-preview video {
+    width: 100%;
+    max-height: 360px;
+    object-fit: cover;
+    border-bottom: 1px solid #444;
+}
+
+.post-meta {
+    padding: 15px;
+}
+
+.post-meta h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    color: #fff;
+}
+
+.post-meta p {
+    margin: 0 0 5px;
+    color: #ccc;
+}
+
+.post-meta small {
+    color: #999;
+}
+
+.subtext {
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Upload + Forms */
+.upload-container,
+.form-card {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #2b2b2b;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.upload-container h2,
+.form-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.upload-form label,
+.form-card label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #f0f0f0;
+}
+
+.upload-form input[type="text"],
+.upload-form textarea,
+.upload-form input[type="file"],
+.form-card input,
+.form-card select {
+    width: 100%;
+    padding: 10px;
+    background-color: #3a3a3a;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.upload-form button,
+.form-card button,
+.comment-form button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    background-color: #0077cc;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.upload-form button:hover,
+.form-card button:hover,
+.comment-form button:hover {
+    background-color: #005fa3;
+}
+
+/* Alerts */
+.alert-box {
+    max-width: 400px;
+    margin: 30px auto 0 auto;
+    padding: 15px 20px;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Like Button */
+.like-btn {
+    display: inline-block;
+    color: #ff4d4d;
+    font-size: 18px;
+    text-decoration: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.like-btn:hover {
+    text-decoration: underline;
+}
+
+/* Comment Form */
+.comment-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.comment-form input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    background-color: #3a3a3a;
+    border: 1px solid #555;
+    border-radius: 6px;
+    color: white;
+}
+
+/* Comments Display */
+.comment-list {
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+.comment-list p {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 5px;
+}
+.dashboard-card {
+    display: inline-block;
+    background: #2a2a2a;
+    color: #f0f0f0;
+    padding: 20px 30px;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+    flex: 1 1 200px;
+}
+
+.dashboard-card:hover {
+    background-color: #0077cc;
+    color: white;
+}
+.action-buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 15px;
+}
+
+.delete-btn, .download-btn {
+    background-color: #444;
+    padding: 8px 14px;
+    border-radius: 6px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+
+.delete-btn:hover {
+    background-color: #cc3333;
+}
+
+.download-btn:hover {
+    background-color: #0077cc;
+}

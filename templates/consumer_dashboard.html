@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Consumer Dashboard | SnapView</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">SnapView</div>
+        <div class="nav-right">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </nav>
+
+    <div class="feed-container">
+        <h2>Hello {{ session['username'] }} 👋</h2>
+        <p class="subtext">Scroll through the latest uploads from SnapView Creators:</p>
+
+        {% if posts %}
+            {% for post in posts %}
+                <div class="post-card enhanced-card">
+                    <div class="media-preview">
+                        {% if post.filename.endswith('.mp4') %}
+                            <video controls>
+                                <source src="{{ url_for('static', filename='uploads/' + post.filename) }}" type="video/mp4">
+                            </video>
+                        {% else %}
+                            <img src="{{ url_for('static', filename='uploads/' + post.filename) }}" alt="media">
+                        {% endif %}
+                    </div>
+
+                    <div class="post-meta">
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.caption }}</p>
+                        <small>📍 {{ post.location }} | 👥 {{ post.people }}</small><br>
+                        <small>By <strong>{{ post.username }}</strong></small>
+
+                        <div class="like-comment-section">
+                            <a href="{{ url_for('like', post_id=post.id) }}" class="like-btn">❤️ {{ post.likes }}</a>
+
+                            <form action="{{ url_for('comment', post_id=post.id) }}" method="POST" class="comment-form">
+                                <input type="text" name="comment" placeholder="Add a comment..." required>
+                                <button type="submit">Post</button>
+                            </form>
+
+                            <div class="comment-list">
+                                {% for comment in post.comments %}
+                                    <p><strong>{{ comment.commenter }}:</strong> {{ comment.text }}</p>
+                                {% endfor %}
+                            </div>
+
+                            <div class="action-buttons">
+                                <a class="download-btn" href="{{ url_for('static', filename='uploads/' + post.filename) }}" download>🔽 Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No posts yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

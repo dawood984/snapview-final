@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Uploads | SnapView</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">SnapView</div>
+        <div class="nav-right">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('upload') }}">Upload</a>
+            <a href="{{ url_for('creator_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </nav>
+
+    <div class="feed-container">
+        <h2>Your Uploads 📁</h2>
+        <p class="subtext">Everything you’ve uploaded is listed here with actions.</p>
+
+        {% if posts %}
+            {% for post in posts %}
+                <div class="post-card enhanced-card">
+                    <div class="media-preview">
+                        {% if post.filename.endswith('.mp4') %}
+                            <video controls>
+                                <source src="{{ url_for('static', filename='uploads/' + post.filename) }}" type="video/mp4">
+                            </video>
+                        {% else %}
+                            <img src="{{ url_for('static', filename='uploads/' + post.filename) }}" alt="uploaded media">
+                        {% endif %}
+                    </div>
+
+                    <div class="post-meta">
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.caption }}</p>
+                        <small>📍 {{ post.location }} | 👥 {{ post.people }}</small><br>
+                        <small><strong>Likes:</strong> {{ post.likes }}</small>
+
+                        <div class="action-buttons">
+                            <a class="delete-btn" href="{{ url_for('delete', post_id=post.id) }}" onclick="return confirm('Delete this post?')">🗑️ Delete</a>
+                            <a class="download-btn" href="{{ url_for('static', filename='uploads/' + post.filename) }}" download>🔽 Download</a>
+                        </div>
+
+                        <div class="comment-list">
+                            <h4 style="margin-top: 10px;">Comments:</h4>
+                            {% if post.comments %}
+                                {% for comment in post.comments %}
+                                    <p><strong>{{ comment.commenter }}:</strong> {{ comment.text }}</p>
+                                {% endfor %}
+                            {% else %}
+                                <p>No comments yet.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>You haven’t uploaded anything yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
