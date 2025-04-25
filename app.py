@@ -24,8 +24,8 @@ AZURE_CONTAINER_NAME = "uploads"
 blob_service_client = BlobServiceClient.from_connection_string(AZURE_CONNECTION_STRING)
 container_client = blob_service_client.get_container_client(AZURE_CONTAINER_NAME)
 
-# Init DB
-init_db()
+# Init DB (commented for deployment safety)
+# init_db()
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -162,10 +162,10 @@ def like(post_id):
     add_like(post_id, session['username'])
     return redirect(request.referrer)
 
+# Optional: Health check route
 @app.route('/ping')
 def ping():
-    return "Flask app is alive!"
-
+    return "App is alive!"
 
 if __name__ == '__main__':
     app.run(debug=True)
